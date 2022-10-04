@@ -6,6 +6,7 @@ var app = express()
 const session = require('express-session');
 const bodyParser = require('body-parser')
 const multer = require('multer')
+var nodemailer = require("nodemailer")
 
 app.use(cors({
     
@@ -202,6 +203,52 @@ app.delete('/images/:id', (req,res)=>{
 //     res.status(400).send("Please upload a valid images");
 //   }
 // });
+
+
+// inscription 
+app.post('/service/inscription', (req,res)=>{
+    const fullName = req.body.fullName
+    const email = req.body.email 
+    const num_tel = req.body.num_tel 
+    const service = req.body.service
+
+    var from = req.body.email
+    var to = "bayedieyeba3@gmail.com"
+    var subject = "inscription service"
+    var message = "Bonjour je veux m'inscrire sur le service : "+ req.body.service + " . Voici mon numéro de téléphone :"+ req.body.num_tel
+
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'bayedieyeba3@gmail.com',
+          pass: 'gngjgewuxrrvzrcn'
+        }
+    })
+
+    var mailOptions = {
+        from: from,
+        to:to,
+        subject:subject,
+        text:message
+    }
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error)
+        } else {
+            response.send("votre mail a été bien transmis")
+        }
+    })
+
+    var sql = "INSERT INTO inscription_service (fullName,email,num_tel,service) VALUES ('" + fullName +"', '" + email +"' ,'" + num_tel +"' ,'" + service +"')";
+        mysqlConnection.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("1 record inserted");
+});
+
+res.send("inscription validé avec succès");
+   
+})
 
 
 
