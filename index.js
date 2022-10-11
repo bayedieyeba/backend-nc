@@ -6,7 +6,8 @@ var app = express()
 const session = require('express-session');
 const bodyParser = require('body-parser')
 const multer = require('multer')
-var nodemailer = require("nodemailer")
+var nodemailer = require("nodemailer");
+const {readFileSync, writeFileSync } = require('fs');
 
 app.use(cors({
     
@@ -21,6 +22,10 @@ app.use(session({
 }));
 
 app.use("/images",express.static("upload/images"))
+app.use("/langue/fr",express.static("assets/locales/fr"))
+app.use("/langue/en",express.static("assets/locales/en"))
+app.use("/langue/ar",express.static("assets/locales/ar"))
+
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -46,6 +51,142 @@ mysqlConnection.connect((err)=>{
 
 app.listen(4000,()=>console.log("Express server  is running at port : 4000"));
 
+
+// modifier compte courant
+app.post('/modifier/compte-courant-francais', (req,res)=>{
+    const {partie1,partie2,partie3,partie4} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    translationFrancais.cc_partie1 = partie1
+    translationFrancais.cc_partie2 = partie2  
+    translationFrancais.cc_partie3 = partie3   
+    translationFrancais.cc_partie4 = partie4  
+
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJson)
+    res.send("modification réussi")
+   
+})
+app.post('/modifier/compte-courant-anglais', (req,res)=>{
+    const {partie1,partie2,partie3,partie4} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    translationFrancais.cc_partie1 = partie1
+    translationFrancais.cc_partie2 = partie2  
+    translationFrancais.cc_partie3 = partie3   
+    translationFrancais.cc_partie4 = partie4  
+
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/en/translation.json',objectToJson)
+    res.send("modification réussi")
+   
+})
+
+app.post('/modifier/compte-courant-arabe', (req,res)=>{
+    const {partie1,partie2,partie3,partie4} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+    translationFrancais.cc_partie1 = partie1
+    translationFrancais.cc_partie2 = partie2  
+    translationFrancais.cc_partie3 = partie3   
+    translationFrancais.cc_partie4 = partie4  
+
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/ar/translation.json',objectToJson)
+    res.send("modification réussi")
+   
+})
+
+
+// modifier compte dépot a terme
+app.post('/modifier/compte-depot-terme-francais', (req,res)=>{
+    const {partie1,partie2,partie3,partie4,partie5} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    translationFrancais.depot_terme1 = partie1
+    translationFrancais.depot_terme2 = partie2  
+    translationFrancais.depot_terme3 = partie3   
+    translationFrancais.depot_terme4 = partie4
+    translationFrancais.depot_terme5 = partie5   
+
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJson)
+    res.send("modification réussi")
+   
+})
+app.post('/modifier/compte-depot-terme-anglais', (req,res)=>{
+    const {partie1,partie2,partie3,partie4,partie5} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    translationFrancais.depot_terme1 = partie1
+    translationFrancais.depot_terme2 = partie2  
+    translationFrancais.depot_terme3 = partie3   
+    translationFrancais.depot_terme4 = partie4
+    translationFrancais.depot_terme5 = partie5  
+
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/en/translation.json',objectToJson)
+    res.send("modification réussi")
+   
+})
+
+app.post('/modifier/compte-depot-terme-arabe', (req,res)=>{
+    const {partie1,partie2,partie3,partie4,partie5} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+    translationFrancais.depot_terme1 = partie1
+    translationFrancais.depot_terme2 = partie2  
+    translationFrancais.depot_terme3 = partie3   
+    translationFrancais.depot_terme4 = partie4
+    translationFrancais.depot_terme5 = partie5  
+
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/ar/translation.json',objectToJson)
+    res.send("modification réussi")
+   
+})
+
+// modifier compte plan epargne
+app.post('/modifier/compte-plan-epargne-francais', (req,res)=>{
+    const {partie1,partie2,partie3,partie4,partie5,partie6} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    translationFrancais.plan_epargne1 = partie1
+    translationFrancais.plan_epargne2 = partie2  
+    translationFrancais.plan_epargne3 = partie3   
+    translationFrancais.plan_epargne4 = partie4
+    translationFrancais.plan_epargne5 = partie5
+    translationFrancais.plan_epargne6 = partie6   
+
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJson)
+    res.send("modification réussi")
+   
+})
+app.post('/modifier/compte-plan-epargne-anglais', (req,res)=>{
+    const {partie1,partie2,partie3,partie4,partie5,partie6} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    translationFrancais.plan_epargne1 = partie1
+    translationFrancais.plan_epargne2 = partie2  
+    translationFrancais.plan_epargne3 = partie3   
+    translationFrancais.plan_epargne4 = partie4
+    translationFrancais.plan_epargne5 = partie5
+    translationFrancais.plan_epargne6 = partie6   
+
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/en/translation.json',objectToJson)
+    res.send("modification réussi")
+   
+})
+
+app.post('/modifier/compte-plan-epargne-arabe', (req,res)=>{
+    const {partie1,partie2,partie3,partie4,partie5,partie6} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+    translationFrancais.plan_epargne1 = partie1
+    translationFrancais.plan_epargne2 = partie2  
+    translationFrancais.plan_epargne3 = partie3   
+    translationFrancais.plan_epargne4 = partie4
+    translationFrancais.plan_epargne5 = partie5
+    translationFrancais.plan_epargne6 = partie6  
+
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/ar/translation.json',objectToJson)
+    res.send("modification réussi")
+   
+})
 
 
 // add user 
@@ -213,9 +354,9 @@ app.post('/service/inscription', (req,res)=>{
     const service = req.body.service
 
     var from = req.body.email
-    var to = "bayedieyeba3@gmail.com"
-    var subject = "inscription service"
-    var message = "Bonjour je veux m'inscrire sur le service : "+ req.body.service + " . Voici mon numéro de téléphone :"+ req.body.num_tel
+    var to = "contact@nationalcash.mr"
+    var subject = "inscription sur un service"
+    var message = "Bonjour je veux m'inscrire sur le service : "+ req.body.service + " . Voici mon numéro de téléphone :"+ req.body.num_tel + " et mon email: "+req.body.email
 
     var transporter = nodemailer.createTransport({
         service: 'gmail',
