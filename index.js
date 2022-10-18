@@ -53,6 +53,33 @@ app.listen(4000,()=>console.log("Express server  is running at port : 4000"));
 
 
 // modifier compte courant
+app.get("/partie-francais-compte-courant",(req,res)=>{
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationFrancais.cc_partie1,
+        "partie2":translationFrancais.cc_partie2,
+        "partie3":translationFrancais.cc_partie3,
+        "partie4":translationFrancais.cc_partie4,
+    })
+})
+app.get("/partie-anglais-compte-courant",(req,res)=>{
+    const translationAnglais = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationAnglais.cc_partie1,
+        "partie2":translationAnglais.cc_partie2,
+        "partie3":translationAnglais.cc_partie3,
+        "partie4":translationAnglais.cc_partie4,
+    })
+})
+app.get("/partie-arabe-compte-courant",(req,res)=>{
+    const translationArabe = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationArabe.cc_partie1,
+        "partie2":translationArabe.cc_partie2,
+        "partie3":translationArabe.cc_partie3,
+        "partie4":translationArabe.cc_partie4,
+    })
+})
 app.post('/modifier/compte-courant-francais', (req,res)=>{
     const {partie1,partie2,partie3,partie4} = req.body
     const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
@@ -96,6 +123,37 @@ app.post('/modifier/compte-courant-arabe', (req,res)=>{
 
 
 // modifier compte dépot a terme
+app.get("/partie-francais-compte-depot-terme",(req,res)=>{
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationFrancais.depot_terme1,
+        "partie2":translationFrancais.depot_terme2,
+        "partie3":translationFrancais.depot_terme3,
+        "partie4":translationFrancais.depot_terme4,
+        "partie5" :translationFrancais.depot_terme5
+    })
+})
+
+app.get("/partie-anglais-compte-depot",(req,res)=>{
+    const translationAnglais = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationAnglais.depot_terme1,
+        "partie2":translationAnglais.depot_terme2,
+        "partie3":translationAnglais.depot_terme3,
+        "partie4":translationAnglais.depot_terme4,
+        "partie5" :translationAnglais.depot_terme5
+    })
+})
+app.get("/partie-arabe-compte-depot",(req,res)=>{
+    const translationArabe = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationArabe.depot_terme1,
+        "partie2":translationArabe.depot_terme2,
+        "partie3":translationArabe.depot_terme3,
+        "partie4":translationArabe.depot_terme4,
+        "partie5" :translationArabe.depot_terme5
+    })
+})
 app.post('/modifier/compte-depot-terme-francais', (req,res)=>{
     const {partie1,partie2,partie3,partie4,partie5} = req.body
     const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
@@ -141,6 +199,39 @@ app.post('/modifier/compte-depot-terme-arabe', (req,res)=>{
 })
 
 // modifier compte plan epargne
+app.get("/partie-francais-compte-epargn",(req,res)=>{
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationFrancais.plan_epargne1,
+        "partie2":translationFrancais.plan_epargne2,
+        "partie3":translationFrancais.plan_epargne3,
+        "partie4":translationFrancais.plan_epargne4,
+        "partie5" :translationFrancais.plan_epargne5,
+        "partie6" : translationFrancais.plan_epargne6
+    })
+})
+app.get("/partie-anglais-compte-epargn",(req,res)=>{
+    const translationAnglais = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationAnglais.plan_epargne1,
+        "partie2":translationAnglais.plan_epargne2,
+        "partie3":translationAnglais.plan_epargne3,
+        "partie4":translationAnglais.plan_epargne4,
+        "partie5" :translationAnglais.plan_epargne5,
+        "partie6" : translationAnglais.plan_epargne6
+    })
+})
+app.get("/partie-arabe-compte-epargn",(req,res)=>{
+    const translationArabe = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationArabe.plan_epargne1,
+        "partie2":translationArabe.plan_epargne2,
+        "partie3":translationArabe.plan_epargne3,
+        "partie4":translationArabe.plan_epargne4,
+        "partie5" :translationArabe.plan_epargne5,
+        "partie6" : translationArabe.plan_epargne6
+    })
+})
 app.post('/modifier/compte-plan-epargne-francais', (req,res)=>{
     const {partie1,partie2,partie3,partie4,partie5,partie6} = req.body
     const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
