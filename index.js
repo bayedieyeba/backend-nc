@@ -51,7 +51,72 @@ mysqlConnection.connect((err)=>{
 
 app.listen(4000,()=>console.log("Express server  is running at port : 4000"));
 
+// modifier mot du direteur
+app.get("/mot-directeur",(req,res)=>{
+    const translationFr = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    const translationAn = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    const translationAtr = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+    res.send({
+        "mot_dg_Fr":translationFr.bio_samba,
+        "mot_dg_En":translationAn.bio_samba,
+        "mot_dg_Ar":translationAtr.bio_samba,
+        
+    })
+})
+app.post("/modifier-mot-directeur",(req,res)=>{
+    const {motFr,motEn,motAr} = req.body
+    const translationFr = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    const translationEn = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    const translationAr = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+    translationFr.bio_samba = motFr
+    translationEn.bio_samba = motEn 
+    translationAr.bio_samba = motAr   
+    
+    const objectToJsonFr = JSON.stringify(translationFr)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJsonFr)
+    const objectToJsonEn = JSON.stringify(translationEn)
+    writeFileSync('./assets/locales/en/translation.json',objectToJsonEn)
+    const objectToJsonAr = JSON.stringify(translationAr)
+    writeFileSync('./assets/locales/ar/translation.json',objectToJsonAr)
+    res.send("modification réussi")
+})
 
+//modifier text description
+app.get("/get-text-description",(req,res)=>{
+    const translationFr = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    const translationAn = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    const translationAtr = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+    res.send({
+        "text_des_fr":translationFr.description_nc,
+        "text_des_en":translationAn.description_nc,
+        "text_des_ar":translationAtr.description_nc,
+        
+        "titre_fr":translationFr.titre1,
+        "titre_en":translationAn.titre1,
+        "titre_ar":translationAtr.titre1,
+    })
+})
+app.post("/modifier-text-description",(req,res)=>{
+    const {titre_fr,titre_en,titre_ar,text_des_fr,text_des_en,text_des_ar} = req.body
+    const translationFr = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    const translationEn = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    const translationAr = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+    translationFr.titre1 = titre_fr
+    translationEn.titre1 = titre_en
+    translationAr.titre1 = titre_ar
+    
+    translationFr.description_nc = text_des_fr
+    translationEn.description_nc = text_des_en
+    translationAr.description_nc = text_des_ar 
+    
+    const objectToJsonFr = JSON.stringify(translationFr)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJsonFr)
+    const objectToJsonEn = JSON.stringify(translationEn)
+    writeFileSync('./assets/locales/en/translation.json',objectToJsonEn)
+    const objectToJsonAr = JSON.stringify(translationAr)
+    writeFileSync('./assets/locales/ar/translation.json',objectToJsonAr)
+    res.send("modification réussi")
+})
 // modifier compte courant
 app.get("/partie-francais-compte-courant",(req,res)=>{
     const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
