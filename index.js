@@ -50,7 +50,105 @@ mysqlConnection.connect((err)=>{
 
 
 app.listen(4000,()=>console.log("Express server  is running at port : 4000"));
+// liens reseaux sociaux
+app.get("/text-mission",(req,res)=>{
+    const translationFr = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    const translationAn = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    const translationAtr = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+    res.send({
+        "text_mission_Fr":translationFr.text_mission,
+        "text_mission_En":translationAn.text_mission,
+        "text_mission_Ar":translationAtr.text_mission,
+        
+    })
+})
+app.post("/modifier-lien-reseaux-sociaux",(req,res)=>{
+    const {lienFacebook,lienInstagram,lienSnap,lienLinkdin} = req.body
+    const translationFr = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    const translationEn = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    const translationAr = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+    translationFr.lien_faceBook = lienFacebook
+    translationFr.lien_instagram = lienInstagram
+    translationFr.lien_snap = lienSnap
+    translationFr.lien_linkdin = lienLinkdin
 
+    translationEn.lien_faceBook = lienFacebook
+    translationEn.lien_instagram = lienInstagram
+    translationEn.lien_snap = lienSnap
+    translationEn.lien_linkdin = lienLinkdin
+
+    translationAr.lien_faceBook = lienFacebook
+    translationAr.lien_instagram = lienInstagram
+    translationAr.lien_snap = lienSnap
+    translationAr.lien_linkdin = lienLinkdin
+
+    
+    const objectToJsonFr = JSON.stringify(translationFr)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJsonFr)
+    const objectToJsonEn = JSON.stringify(translationEn)
+    writeFileSync('./assets/locales/en/translation.json',objectToJsonEn)
+    const objectToJsonAr = JSON.stringify(translationAr)
+    writeFileSync('./assets/locales/ar/translation.json',objectToJsonAr)
+    res.send("modification réussi")
+})
+
+// modifier mission
+app.get("/liens-reseau-sociaux",(req,res)=>{
+    const translationFr = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    res.send({
+        "lien_faceBook":translationFr.lien_faceBook,
+        "lien_instagram":translationFr.lien_instagram,
+        "lien_snap":translationFr.lien_snap, 
+        "lien_linkdin":translationFr.lien_linkdin,
+    })
+})
+app.post("/modifier-text-mission",(req,res)=>{
+    const {textMissionFr,textMissionEn,textMissionAr} = req.body
+    const translationFr = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    const translationEn = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    const translationAr = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+    translationFr.text_mission = textMissionFr
+    translationEn.text_mission = textMissionEn 
+    translationAr.text_mission = textMissionAr   
+    
+    const objectToJsonFr = JSON.stringify(translationFr)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJsonFr)
+    const objectToJsonEn = JSON.stringify(translationEn)
+    writeFileSync('./assets/locales/en/translation.json',objectToJsonEn)
+    const objectToJsonAr = JSON.stringify(translationAr)
+    writeFileSync('./assets/locales/ar/translation.json',objectToJsonAr)
+    res.send("modification réussi")
+})
+
+// modifier vision
+app.get("/get-text-vision-modifier",(req,res)=>{
+    const translationFr = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    const translationAn = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    const translationAtr = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+    res.send({
+        "text_vision_Fr":translationFr.text_vision,
+        "text_vision_En":translationAn.text_vision,
+        "text_vision_Ar":translationAtr.text_vision,
+        
+    })
+})
+app.post("/modifier-text-vision",(req,res)=>{
+    const {textVisionFr,textVisionEn,textVisionAr} = req.body
+    const translationFr = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    const translationEn = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    const translationAr = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+    translationFr.text_vision = textVisionFr
+    translationEn.text_vision = textVisionEn 
+    translationAr.text_vision = textVisionAr   
+    
+    const objectToJsonFr = JSON.stringify(translationFr)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJsonFr)
+    const objectToJsonEn = JSON.stringify(translationEn)
+    writeFileSync('./assets/locales/en/translation.json',objectToJsonEn)
+    const objectToJsonAr = JSON.stringify(translationAr)
+    writeFileSync('./assets/locales/ar/translation.json',objectToJsonAr)
+    res.send("modification réussi")
+})
 // modifier mot du direteur
 app.get("/mot-directeur",(req,res)=>{
     const translationFr = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
