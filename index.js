@@ -442,7 +442,204 @@ app.post('/modifier/compte-plan-epargne-arabe', (req,res)=>{
    
 })
 
+// credit mawleny
+app.get("/partie-francais-credit-mawleny",(req,res)=>{
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationFrancais.description1_mewelny,
+        "partie2":translationFrancais.description2_mewelny,
+        "partie3":translationFrancais.description3_mewelny,
+        "partie4":translationFrancais.description4_mewelny,
+        "partie5" :translationFrancais.description5_mewelny,
+       
+    })
+})
+app.post('/modifier/credit-mawleny-francais', (req,res)=>{
+    const {partie1,partie2,partie3,partie4,partie5} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    translationFrancais.description1_mewelny = partie1
+    translationFrancais.description2_mewelny = partie2  
+    translationFrancais.description3_mewelny = partie3   
+    translationFrancais.description4_mewelny = partie4
+    translationFrancais.description5_mewelny = partie5
+      
 
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJson)
+    res.send("modification réussi")
+   
+})
+
+//credit noujoume
+app.get("/partie-francais-credit-noujoume",(req,res)=>{
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationFrancais.description1_noujoune,
+        "partie2":translationFrancais.description2_noujoune,
+        "partie3":translationFrancais.description3_noujoune,
+        "partie4":translationFrancais.description4_noujoune,
+        "partie5" :translationFrancais.description5_noujoune,
+       
+    })
+})
+app.post('/modifier/credit-noujoume-francais', (req,res)=>{
+    const {partie1,partie2,partie3,partie4,partie5} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    translationFrancais.description1_noujoune = partie1
+    translationFrancais.description2_noujoune = partie2  
+    translationFrancais.description3_noujoune = partie3   
+    translationFrancais.description4_noujoune = partie4
+    translationFrancais.description5_noujoune = partie5
+      
+
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJson)
+    res.send("modification réussi")
+   
+})
+// credit beyti
+app.get("/partie-francais-credit-beyti",(req,res)=>{
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationFrancais.description1_beyti,
+        "partie2":translationFrancais.description2_beyti,
+        "partie3":translationFrancais.description3_beyti,
+        "partie4":translationFrancais.description4_beyti,
+        "partie5" :translationFrancais.description5_beyti,
+        "partie6":translationFrancais.description6_beyti,
+        "partie7" :translationFrancais.description7_beyti,
+       
+    })
+})
+app.post('/modifier/credit-beyti-francais', (req,res)=>{
+    const {partie1,partie2,partie3,partie4,partie5,partie6,partie7} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    translationFrancais.description1_beyti = partie1
+    translationFrancais.description2_beyti = partie2  
+    translationFrancais.description3_beyti = partie3   
+    translationFrancais.description4_beyti = partie4
+    translationFrancais.description5_beyti = partie5
+    translationFrancais.description6_beyti = partie6
+    translationFrancais.description7_beyti = partie7
+      
+
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJson)
+    res.send("modification réussi")
+})
+
+// credit bidaya 
+app.get("/partie-francais-credit-bidaya",(req,res)=>{
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationFrancais.description1_bidaya,
+        "partie2":translationFrancais.description2_bidaya,
+        "partie3":translationFrancais.description3_bidaya,
+        "partie4":translationFrancais.description4_bidaya,
+        "partie5" :translationFrancais.description5_bidaya,
+        "partie6":translationFrancais.description6_bidaya,
+        "partie7" :translationFrancais.description7_bidaya, 
+    })
+})
+app.post('/modifier/credit-bidaya-francais', (req,res)=>{
+    const {partie1,partie2,partie3,partie4,partie5,partie6,partie7} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    translationFrancais.description1_bidaya = partie1
+    translationFrancais.description2_bidaya = partie2  
+    translationFrancais.description3_bidaya = partie3   
+    translationFrancais.description4_bidaya = partie4
+    translationFrancais.description5_bidaya = partie5
+    translationFrancais.description6_bidaya = partie6
+    translationFrancais.description7_bidaya = partie7
+      
+
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJson)
+    res.send("modification réussi")
+})
+
+// credit takaful
+app.get("/partie-francais-credit-takaful",(req,res)=>{
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationFrancais.description1_takaful,
+        "partie2":translationFrancais.description2_takaful,
+        "partie3":translationFrancais.description3_takaful,
+        "partie4":translationFrancais.description4_takaful,
+        "partie5" :translationFrancais.description5_takaful,
+        "partie6":translationFrancais.description6_takaful,
+    })
+})
+app.post('/modifier/credit-takaful-francais', (req,res)=>{
+    const {partie1,partie2,partie3,partie4,partie5,partie6} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    translationFrancais.description1_takaful = partie1
+    translationFrancais.description2_takaful = partie2  
+    translationFrancais.description3_takaful = partie3   
+    translationFrancais.description4_takaful = partie4
+    translationFrancais.description5_takaful = partie5
+    translationFrancais.description6_takaful = partie6
+  
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJson)
+    res.send("modification réussi")
+})
+// credit equipement 
+app.get("/partie-francais-credit-equipement-samsung",(req,res)=>{
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationFrancais.description1_equipement,
+        "partie2":translationFrancais.description2_equipement,
+        "partie3":translationFrancais.description3_equipement,
+        "partie4":translationFrancais.description4_equipement,
+        "partie5" :translationFrancais.description5_equipement,
+        "partie6":translationFrancais.description6_equipement,
+        "partie7" :translationFrancais.description7_equipement,
+        "partie8":translationFrancais.description8_equipement,
+    })
+})
+app.post('/modifier/credit-equipement-francais', (req,res)=>{
+    const {partie1,partie2,partie3,partie4,partie5,partie6,partie7,partie8} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    translationFrancais.description1_equipement = partie1
+    translationFrancais.description2_equipement = partie2  
+    translationFrancais.description3_equipement = partie3   
+    translationFrancais.description4_equipement = partie4
+    translationFrancais.description5_equipement = partie5
+    translationFrancais.description6_equipement = partie6
+    translationFrancais.description7_equipement = partie7
+    translationFrancais.description8_equipement = partie8
+  
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJson)
+    res.send("modification réussi")
+})
+// credit avance sur salaire
+app.get("/partie-francais-credit-avance-salaire",(req,res)=>{
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    res.send({
+        "partie1":translationFrancais.description1_avance_salaire,
+        "partie2":translationFrancais.description2_avance_salaire,
+        "partie3":translationFrancais.description3_avance_salaire,
+        "partie4":translationFrancais.description4_avance_salaire,
+        "partie5" :translationFrancais.description5_avance_salaire,
+        
+    })
+})
+app.post('/modifier/credit-avance-salaire-francais', (req,res)=>{
+    const {partie1,partie2,partie3,partie4,partie5} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    translationFrancais.description1_avance_salaire = partie1
+    translationFrancais.description2_avance_salaire = partie2  
+    translationFrancais.description3_avance_salaire = partie3   
+    translationFrancais.description4_avance_salaire = partie4
+    translationFrancais.description5_avance_salaire = partie5
+    
+  
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJson)
+    res.send("modification réussi")
+})
 // add user 
 app.post('/users/add', (req,res)=>{
     const {login, password } =req.body
@@ -644,8 +841,3 @@ app.post('/service/inscription', (req,res)=>{
 res.send("inscription validé avec succès");
    
 })
-
-
-
-
-
