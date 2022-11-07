@@ -1007,6 +1007,93 @@ app.post('/modifier/credit-avance-salaire-anglais', (req,res)=>{
     writeFileSync('./assets/locales/en/translation.json',objectToJson)
     res.send("modification réussi")
 })
+
+// numero service
+app.get("/get-service-number",(req,res)=>{
+    const translationAnglais = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    res.send({
+        "num1":translationAnglais.num_service_1,
+        "num2":translationAnglais.num_service_2,
+        "email":translationAnglais.email_service,
+        "adresse" : translationAnglais.adresse_service,   
+    })
+})
+
+app.post('/modifier/service-number', (req,res)=>{
+    const {num1,num2,email,adresse} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    const translationAnglais = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    const translationArabe = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+
+    translationFrancais.num_service_1=num1
+    translationFrancais.num_service_2=num2
+    translationFrancais.email_service=email
+    translationFrancais.adresse_service=adresse
+
+    translationAnglais.num_service_1=num1
+    translationAnglais.num_service_2=num2
+    translationAnglais.email_service=email 
+    translationAnglais.adresse_service=adresse
+
+    translationArabe.num_service_1=num1
+    translationArabe.num_service_2=num2 
+    translationArabe.email_service=email
+    translationArabe.adresse_service=adresse
+    
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJson)
+    const objectToJson2 = JSON.stringify(translationAnglais)
+    writeFileSync('./assets/locales/en/translation.json',objectToJson2)
+    const objectToJson3 = JSON.stringify(translationArabe)
+    writeFileSync('./assets/locales/ar/translation.json',objectToJson3)
+
+    res.send("modification réussi")
+})
+
+// numero agants
+app.get("/get-agence-number",(req,res)=>{
+    const translationAnglais = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    res.send({
+        "num_central":translationAnglais.num_agent_central,
+        "num_charbon":translationAnglais.num_agent_charbon,
+        "num_toujouni":translationAnglais.num_agent_toujouni,
+        "num_point_chaud" : translationAnglais.num_agant_point_chaud,
+        "num_nouadhibou":translationAnglais.num_agant_nouadhibou,         
+    })
+})
+app.post('/modifier/number-of-agences', (req,res)=>{
+    const {num_central,num_charbon,num_toujouni,num_point_chaud,num_nouadhibou} = req.body
+    const translationFrancais = JSON.parse(readFileSync('./assets/locales/fr/translation.json', 'utf-8'))
+    const translationAnglais = JSON.parse(readFileSync('./assets/locales/en/translation.json', 'utf-8'))
+    const translationArabe = JSON.parse(readFileSync('./assets/locales/ar/translation.json', 'utf-8'))
+
+    translationFrancais.num_agent_central=num_central
+    translationFrancais.num_agent_charbon=num_charbon
+    translationFrancais.num_agent_toujouni=num_toujouni
+    translationFrancais.num_agant_point_chaud=num_point_chaud
+    translationFrancais.num_agant_nouadhibou=num_nouadhibou
+
+    translationAnglais.num_agent_central=num_central
+    translationAnglais.num_agent_charbon=num_charbon
+    translationAnglais.num_agent_toujouni=num_toujouni
+    translationAnglais.num_agant_point_chaud=num_point_chaud
+    translationAnglais.num_agant_nouadhibou=num_nouadhibou
+
+    translationArabe.num_agent_central=num_central
+    translationArabe.num_agent_charbon=num_charbon
+    translationArabe.num_agent_toujouni=num_toujouni
+    translationArabe.num_agant_point_chaud=num_point_chaud
+    translationArabe.num_agant_nouadhibou=num_nouadhibou
+    
+    const objectToJson = JSON.stringify(translationFrancais)
+    writeFileSync('./assets/locales/fr/translation.json',objectToJson)
+    const objectToJson2 = JSON.stringify(translationAnglais)
+    writeFileSync('./assets/locales/en/translation.json',objectToJson2)
+    const objectToJson3 = JSON.stringify(translationArabe)
+    writeFileSync('./assets/locales/ar/translation.json',objectToJson3)
+
+    res.send("modification réussi")
+})
 // add user 
 app.post('/users/add', (req,res)=>{
     const {login, password } =req.body
