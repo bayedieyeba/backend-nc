@@ -1105,36 +1105,6 @@ app.post('/users/add', (req,res)=>{
             console.log(err);
     })
 })
-// http://localhost:3000/auth
-app.post('/users/auth', function(request, response) {
-	// Capture the input fields
-	let login = request.body.login;
-	let password = request.body.password;
-	// Ensure the input fields exists and are not empty
-	if (login && password) {
-		// Execute SQL query that'll select the account from the database based on the specified username and password
-		mysqlConnection.query('SELECT * FROM users WHERE login = ? AND password = ?', [login, password], function(error, results, fields) {
-			// If there is an issue with the query, output the error
-			if (error) throw error;
-			// If the account exists
-			if (results.length > 0) {
-				// Authenticate the user
-				request.session.loggedin = true;
-				request.session.login = login;
-
-				response.send(results)
-				
-			} else {
-				response.send('Incorrect Username and/or Password!');
-			}			
-			response.end();
-		});
-	} else {
-		response.send('Please enter Username and Password!');
-		response.end();
-	}
-});
-
 
 app.get('/services', (req,res)=>{
     mysqlConnection.query("SELECT * FROM service",(err,rows,fields)=> {
@@ -1222,7 +1192,59 @@ const upload = multer({
       res.status(400).send("Please upload a valid image");
     }
   });
-
+// image dg
+app.post("/add-image-dg", upload.single("image"),(req, res) => {
+    if (req.file) {
+        const url = ""+req.file.filename;
+       
+        var sql = "INSERT INTO directeur (url) VALUES ('" + url +"')";
+        mysqlConnection.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("1 record inserted");
+  });
+        
+      res.send("Single file uploaded successfully");
+    } else {
+      res.status(400).send("Please upload a valid image");
+    }
+  });
+ 
+  app.get("/get-image-dg",(req,res)=>{
+    
+    mysqlConnection.query("SELECT url from directeur order by ID desc limit 1",(err,rows,fields)=> {
+        if(!err)
+            res.send(rows)
+        else
+            console.log(err);
+    })
+  })
+  //
+  // logo
+  app.post("/add-image-logoSite", upload.single("image"),(req, res) => {
+    if (req.file) {
+        const url = ""+req.file.filename;
+       
+        var sql = "INSERT INTO logo (url) VALUES ('" + url +"')";
+        mysqlConnection.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("1 record inserted");
+  });
+        
+      res.send("Single file uploaded successfully");
+    } else {
+      res.status(400).send("Please upload a valid image");
+    }
+  });
+  
+  app.get("/get-image-logo",(req,res)=>{
+    
+    mysqlConnection.query("SELECT url from logo order by ID desc limit 1",(err,rows,fields)=> {
+        if(!err)
+            res.send(rows)
+        else
+            console.log(err);
+    })
+  })
   // get all images 
   app.get('/api/images', (req,res)=>{
     mysqlConnection.query("SELECT * FROM images",(err,rows,fields)=> {
