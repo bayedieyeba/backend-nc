@@ -1235,7 +1235,49 @@ app.post("/add-image-dg", upload.single("image"),(req, res) => {
       res.status(400).send("Please upload a valid image");
     }
   });
-  
+
+  // agent
+  app.get('/get-agent', (req,res)=>{
+    mysqlConnection.query("SELECT * FROM agent",(err,rows,fields)=> {
+        if(!err)
+            res.send(rows)
+        else
+            console.log(err);
+    })
+})
+
+app.post('/add-agent', (req,res)=>{
+    const {nom, longitude, altitude,phone} =req.body
+    const url = `https://maps.google.com/maps?q=${altitude},${longitude}&hl=es;&output=embed`
+    const service = {longitude,altitude,url,nom,phone}
+    mysqlConnection.query("INSERT INTO agent SET ?",[service],(err,rows,fields)=> {
+        if(!err)
+            res.send(rows)
+        else
+            console.log(err);
+    })
+})
+
+app.delete('/agent/:id', (req,res)=>{
+    mysqlConnection.query("DELETE FROM agent WHERE id = ?",[req.params.id],(err,rows,fields)=> {
+        if(!err)
+            res.send("Deleted successfully")
+        else
+            console.log(err);
+    })
+})
+app.put('/update-agent/:id', (req,res)=>{
+    const {nom, longitude, altitude,phone} =req.body
+    const url = `https://maps.google.com/maps?q=${altitude},${longitude}&hl=es;&output=embed`
+    const id = [req.params.id]
+    const agent = {longitude,altitude,url,nom,phone,id}
+    mysqlConnection.query(`UPDATE agent SET ?  WHERE  id = ${id}`,[agent],(err,rows,fields)=> {
+        if(!err)
+            res.send(rows)
+        else
+            console.log(err);
+    })
+})
   app.get("/get-image-logo",(req,res)=>{
     
     mysqlConnection.query("SELECT url from logo order by ID desc limit 1",(err,rows,fields)=> {
